@@ -28,7 +28,8 @@ mv ./target/release/examples/list-containers bin/
 
 ## Option 2: Use existing project binary for x86-64 
 ```bash
-ls -l bin/list-containers.x86-64
+file bin/list-containers.x86-64
+> bin/list-containers.x86-64: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=df227237a0829e251c79399f9d90774238763f98, for GNU/Linux 3.2.0, with debug_info, not stripped
 ```
 
 ## Download a cloud archive object
