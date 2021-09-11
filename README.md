@@ -1,4 +1,4 @@
-# Rust openstack swift client for downloading cloud archive
+# Rust openstack swift client to download cloud archive object
 
 ## Environnements variables setup 
 
@@ -8,7 +8,7 @@ OS_TENANT_NAME=<OS_TENANT_NAME>
 OS_TENANT_ID=<OS_OS_TENANT_ID>
 OS_REGION_NAME=<OS_REGION_NAME>
 OS_USERNAME=<OS_USERNAME>
-OS_PASSWORD<OS_PASSWORD> # if you don't want to use OS_TOKEN
+OS_PASSWORD<OS_PASSWORD> # not used when OS_AUTH_TYPE=v3token but mandatory to concatenate the connection string used by sshpass
 OS_TOKEN=<OS_TOKEN>
 OS_AUTH_URL=https://auth.cloud.ovh.net/v3/
 OS_URL=https://storage.${OS_REGION_NAME}.cloud.ovh.net/v1/AUTH_${OS_TENANT_ID}
@@ -39,4 +39,26 @@ file bin/list-containers.x86-64
 > Downloading resource ...
 ```
 
-Note: if the cloud archive is in cold state, the first request to target scelled object send a request of unscell for this object.
+**N.B. if the cloud archive is in cold state, the first request to target scelled object send a request of unscell for this object.**
+
+## dl_object.sh CLI usage
+```bash
+./dl_object.sh --help
+Script for downloading cloud archive object with OpenStack Swift API
+
+USAGE: ./dl_object.sh <CONTAINER_NAME> <ITEM_LOOKING_FOR> <LOCATION>
+                      [-h|--help]
+  Where:
+    CONTAINER_NAME    The name of cloud archive container. Must be 1st arg
+    ITEM_LOOKING_FOR  The item object string pattern who you are looking for in container. Must be 2nd arg
+    LOCATION          The destination of data retrieved. Must be 3rd arg
+    -h or --help      show help
+```
+
+## bin/list-containers CLI usage
+```bash
+bin/list-containers.x86-64 example-archive-cloud-container-1
+Found container with Name = example-archive-cloud-container-1, Number of object = 1
+first 10 objects
+Name = toto-my-example-dataset.csv, Bytes = 48371
+```
