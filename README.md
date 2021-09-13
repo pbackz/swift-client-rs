@@ -37,6 +37,7 @@ file bin/list-containers.x86-64
 ./dl_object.sh example-archive-cloud-container-1 toto .
 > found toto-my-example-dataset.csv
 > Downloading resource ...
+> lost connection # if not preceeded by "broken pipe" that's gonna be OK
 ```
 
 **N.B. if the cloud archive is in cold state, the first request to target scelled object send a request of unscell for this object.**
@@ -61,4 +62,19 @@ bin/list-containers.x86-64 example-archive-cloud-container-1
 Found container with Name = example-archive-cloud-container-1, Number of object = 1
 first 10 objects
 Name = toto-my-example-dataset.csv, Bytes = 48371
+```
+
+## benchmark
+```bash
+time ./dl_object.sh em-archive-cloud-container-0001 Death 
+found Death.Proof.2007.Unrated.MULTi.1080p.BluRay.x265.AC3.mkv
+Downloading resource ...
+lost connection # if not preceeded by "broken pipe" that's gonna be OK
+
+real    2m24.195s
+user    0m2.098s
+sys     0m20.175s
+
+ls -alh Death.Proof.2007.Unrated.MULTi.1080p.BluRay.x265.AC3.mkv
+-rwxrwxrwx 1 pbackz pbackz 2.4G Sep 13 04:14 Death.Proof.2007.Unrated.MULTi.1080p.BluRay.x265.AC3.mkv
 ```
